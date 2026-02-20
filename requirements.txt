@@ -4,3 +4,4 @@ pandas
 rapidfuzz
 python-multipart
 pydantic
+openai
