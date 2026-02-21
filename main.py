@@ -182,9 +182,15 @@ async def transcribe_upload(audio: UploadFile) -> str:
         client = get_openai_client()
         with open(tmp_path, "rb") as f:
             tx = client.audio.transcriptions.create(
-                model="gpt-4o-mini-transcribe",
-                file=f,
-            )
+               model="gpt-4o-mini-transcribe",
+               file=f,
+              prompt=(
+                  "Transcribe the speaker verbatim in Australian NT Kriol where applicable. "
+                  "Use Latin letters only. Do not use any non-Latin script. "
+                  "Keep spelling approximate if unsure. Do not translate."
+              )
+    )
+
         return (tx.text or "").strip()
     finally:
         try:
